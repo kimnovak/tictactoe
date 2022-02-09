@@ -1,0 +1,8 @@
+dist
+public
+node_modules
+.husky
+.git
+.eslintrc.yml
+package.json
+package-lock.json
