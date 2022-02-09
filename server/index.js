@@ -8,7 +8,6 @@ const io = new Server(httpServer, { cors: {origin: '*'} });
 
 io.on('connection', function(socket) {
     console.log(`User connected ${socket.id}`);
-    const activeRooms = getActiveRooms(io);
 
     socket.on('join', function(roomName) {
         const rooms = io.sockets.adapter.rooms;
@@ -26,7 +25,6 @@ io.on('connection', function(socket) {
             console.log('room full');
         }
     });
-    setTimeout(() => socket.emit('rooms', activeRooms), 2000);
 });
 
 function getActiveRooms(io) {

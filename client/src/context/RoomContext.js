@@ -22,7 +22,7 @@ export function RoomContextProvider({children}) {
         if (!socket.io || typeof socket.io.on !== 'function') {
             return;
         }
-        socket.io.on('rooms', function(data) {
+        socket.io.on('joined', function(data) {
             console.log('rooms', {data})
             setRooms(data.activeRooms);
         })
@@ -35,6 +35,7 @@ export function RoomContextProvider({children}) {
     function createARoom() {
         socket.emit('join', roomName);
     }
+
     const value = {
         socket,
         roomName,
