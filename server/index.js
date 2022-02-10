@@ -25,6 +25,10 @@ io.on('connection', function(socket) {
             console.log('room full');
         }
     });
+
+    socket.on('played', function(payload) {
+        console.log({payload})
+    });
 });
 
 function getActiveRooms(io) {

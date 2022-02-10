@@ -36,10 +36,15 @@ export function RoomContextProvider({children}) {
         socket.emit('join', roomName);
     }
 
+    function emitPlay(payload) {
+        socket.emit('played', payload);
+    }
+
     const value = {
         socket,
         roomName,
         rooms,
+        emitPlay,
         createARoom,
         setRoomName,
     };
