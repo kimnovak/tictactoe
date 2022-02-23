@@ -35,13 +35,12 @@ function updateBoard(board, payload) {
 }
 
 function checkIfWon(board, payload) {
-    const isCenter = payload.row === 1 && payload.column === 1;
-    if (isCenter && checkIf3MarksThroughCenter(board, payload)) {
+    if (checkIf3MarksThroughCenter(board, payload)) {
         return true;
     }
 
-    const has3MarksThroughRow = board[payload.row][0] && board[payload.row][1] && board[payload.row][2];
-    const has3MarksThroughColumn = board[0][payload.column] && board[1][payload.column] && board[2][payload.column];
+    const has3MarksThroughRow = board[payload.row][0] === payload.value && board[payload.row][1] === payload.value && board[payload.row][2] === payload.value;
+    const has3MarksThroughColumn = board[0][payload.column] === payload.value && board[1][payload.column] === payload.value && board[2][payload.column] === payload.value;
 
     return has3MarksThroughRow || has3MarksThroughColumn;
 }
@@ -93,7 +92,7 @@ function reducer(state, action) {
 
 export function GameContextProvider({children}) {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [currentPlayer, setCurrentPlayer] = useState('X');
+    const [currentPlayer, setCurrentPlayer] = useState();
 
     function play({row, column}) {
         dispatch({
@@ -120,12 +119,12 @@ export function GameContextProvider({children}) {
     }
 
     const value = {
-        setCurrentPlayer,
-        play,
-        opponentPlay,
-        state,
         currentPlayer,
+        state,
         dispatch,
+        opponentPlay,
+        play,
+        setCurrentPlayer,
     };
 
     return (

@@ -2,8 +2,6 @@ import useGameContext from '@context/GameContext';
 import useRoomContext from '@context/RoomContext';
 import styles from './styles.module.scss';
 
-const BOARD_DIMENSION = 3;
-
 function Board() {
     const {state: {board, gameState}, play, currentPlayer} = useGameContext();
     const {emitPlay} = useRoomContext();
@@ -11,6 +9,10 @@ function Board() {
     function handlePlay(payload) {
         play(payload);
         emitPlay(payload);
+    }
+
+    if (gameState === 'FINISHED') {
+        return <div>finished</div>
     }
 
     return (

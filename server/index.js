@@ -28,6 +28,7 @@ io.on('connection', function(socket) {
 
     socket.on('played', function(payload) {
         console.log({payload})
+        socket.to(payload.roomName).emit('played', payload);
     });
 });
 
